@@ -30,31 +30,44 @@ LETTER_POOL = {
 }
 
 def draw_letters():
-    # Converts letter pool dict to a list with letters repeated the same number as in the pool
+    # Convert letter pool dict to a list with letters repeated the same number as in the pool
     # the list above has 98 letters.
     # make a random selection out of 98 letters of pool list.
     # add the selected letter to the hand and add a counter that shows frequency of the letter in the hand
     # draw hand should be a dict array with k/v as letters / freq
     # check if freq of the selected letter is less than the freq of the pool
     # repeat this for 10 times!
+    # return is a list of hand letters!
     
     letter_pool_list = []
     hand_dict = {}
+    hand_list = []
 
     for letter, frequency in LETTER_POOL.items():
         for i in range(frequency):
             letter_pool_list.append(letter)
 
-    for i in range(10):
-        draw = randint(1, 99)
+    # for i in range(10):
+    hand_counter = 1
+    while hand_counter <= 10:
+        draw = randint(0, 97)
         letter = letter_pool_list[draw]
 
         if letter not in hand_dict:
             hand_dict[letter] = 1
         else:
-            hand_dict[letter] += 1
+            if hand_dict[letter] <= LETTER_POOL[letter]:
+                hand_dict[letter] += 1
+            else:
+                continue
+        
+        hand_counter += 1
 
-    return hand_dict
+    for letter, frequency in hand_dict.items():
+        for i in range(frequency):
+            hand_list.append(letter)
+
+    return hand_list
 
 
 def uses_available_letters(word, letter_bank):
@@ -66,4 +79,4 @@ def score_word(word):
 def get_highest_word_score(word_list):
     pass
 
-print(draw_letters())
+# print(draw_letters())
