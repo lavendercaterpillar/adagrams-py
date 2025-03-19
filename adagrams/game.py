@@ -30,15 +30,59 @@ LETTER_POOL = {
 }
 
 
+score_chart = {'A':1,
+                   'B':3,
+                   'C':3,
+                   'D':2,
+                   'E':1,
+                   'F':4,
+                   'G':2,
+                   'H':4,
+                   'I':1,
+                   'J':8,
+                   'K':5,
+                   'L':1,
+                   'M':3,
+                   'N':1,
+                   'O':1,
+                   'P':3,
+                   'Q':10,
+                   'R':1,
+                   'S':1,
+                   'T':1,
+                   'U':1,
+                   'V':4,
+                   'W':4,
+                   'X':8,
+                   'Y':4,
+                   'Z':10
+                   }
+
+
+def make_dict(array):
+    '''
+    Creates a dictionary of letters in the array as keys, and frequency of letters as values 
+    input: a sting or a list of characters
+    output: a dictionary of letters as keys, and frequency as values
+    '''
+    make_dict = {}
+    for character in array:
+        if character not in make_dict:
+            make_dict[character] = 1
+        else:
+            make_dict[character] += 1
+    return make_dict
+
+
 def draw_letters():
-    # Convert letter pool dict to a list with letters repeated the same number as in the pool
+    # Convert letter pool dictionary to a list with repeated letters 
     # the list above has 98 letters.
     # make a random selection out of 98 letters of pool list.
     # add the selected letter to the hand and add a counter that shows frequency of the letter in the hand
     # draw hand should be a dict array with k/v as letters / freq
     # check if freq of the selected letter is less than the freq of the pool
-    # repeat this for 10 times!
-    # return is a list of hand letters!
+    # repeat this 10 times!
+    # return a list of hand letters!
     
     letter_pool_list = []
     hand_dict = {}
@@ -48,7 +92,7 @@ def draw_letters():
         for i in range(frequency):
             letter_pool_list.append(letter)
 
-    # for i in range(10):
+    # for i in range(10): Can't use for loop in indetermined number of loops
     hand_counter = 1
     while hand_counter <= 10:
         draw = randint(0, 97)
@@ -79,21 +123,8 @@ def uses_available_letters(word, letter_bank):
     # is more than the frequency of same letter in the draw bank
     
     word = word.upper()
-    word_dict = {}
-    letter_bank_dict = {}
-
-
-    for character in word:
-        if character not in word_dict:
-            word_dict[character] = 1
-        else:
-            word_dict[character] += 1
-
-    for character in letter_bank:
-        if character not in letter_bank_dict:
-            letter_bank_dict[character] = 1
-        else:
-            letter_bank_dict[character] += 1
+    word_dict = make_dict(word)
+    letter_bank_dict = make_dict(letter_bank)
 
     for character, frequency in word_dict.items():
         if  character not in letter_bank_dict:
@@ -104,60 +135,19 @@ def uses_available_letters(word, letter_bank):
     return True
     
 
-def make_dict(array):
-    '''
-    input: a sting or a list of characters
-    output: a dictionary of letters as keys, and frequency as values
-    '''
-    make_dict = {}
-    for character in array:
-        if character not in make_dict:
-            make_dict[character] = 1
-        else:
-            make_dict[character] += 1
-    return make_dict
-
-
 def score_word(word):
-    # build a score chart
-    # then start to calc the score.
     # compare the letters in the word with the letters in score chart. 
     # add corresponding value to the total score
     # Chech if the length of word is more than 7 
     # (should we check if it is more than 10?)
     # return the total score
 
-    score_chart = {'A':1,
-                   'B':3,
-                   'C':3,
-                   'D':2,
-                   'E':1,
-                   'F':4,
-                   'G':2,
-                   'H':4,
-                   'I':1,
-                   'J':8,
-                   'K':5,
-                   'L':1,
-                   'M':3,
-                   'N':1,
-                   'O':1,
-                   'P':3,
-                   'Q':10,
-                   'R':1,
-                   'S':1,
-                   'T':1,
-                   'U':1,
-                   'V':4,
-                   'W':4,
-                   'X':8,
-                   'Y':4,
-                   'Z':10}
-    # letter_bank = draw_letters()
+
+    # letter_bank = draw_letters() 
     word = word.upper()
     word_dict = make_dict(word)
 
-    # if uses_available_letters(word, letter_bank):
+    # if uses_available_letters(word, letter_bank): # No need to check!
     total_score = 0
 
     for letter, frequency in word_dict.items():
