@@ -36,25 +36,25 @@ def draw_letters():
     # add the selected letter to the hand and add a counter that shows frequency of the letter in the hand
     # draw hand should be a dict array with k/v as letters / freq
     # check if freq of the selected letter is less than the freq of the pool
+    # repeat this for 10 times!
     
     letter_pool_list = []
+    hand_dict = {}
 
     for letter, frequency in LETTER_POOL.items():
         for i in range(frequency):
             letter_pool_list.append(letter)
 
-    return letter_pool_list
+    for i in range(10):
+        draw = randint(1, 99)
+        letter = letter_pool_list[draw]
 
-    hand_dict = {}
-    draw = randit(1, 98)
-    letter = letter_pool_list[draw]
+        if letter not in hand_dict:
+            hand_dict[letter] = 1
+        else:
+            hand_dict[letter] += 1
 
-    if letter not in hand_dict:
-        hand_dict[letter] = 1
-    else:
-        hand_dict[letter] += 1
-
-
+    return hand_dict
 
 
 def uses_available_letters(word, letter_bank):
