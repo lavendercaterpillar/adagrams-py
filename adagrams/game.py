@@ -71,7 +71,37 @@ def draw_letters():
 
 
 def uses_available_letters(word, letter_bank):
-    pass
+    # first need to understand what are letters in word and how many of the letter do we have.
+    # then I need to compare each letter with my draw bank:
+    # if the letter in the word doesn't exist in the draw return false
+    # if the letter is in the draw bank then check if the frequency in the word 
+    # is more than the frequency of same letter in the draw bank
+    
+    word = word.upper()
+    word_dict = {}
+    letter_bank_dict = {}
+
+
+    for character in word:
+        if character not in word_dict:
+            word_dict[character] = 1
+        else:
+            word_dict[character] += 1
+
+    for character in letter_bank:
+        if character not in letter_bank_dict:
+            letter_bank_dict[character] = 1
+        else:
+            letter_bank_dict[character] += 1
+
+    for character, frequency in word_dict.items():
+        if  character not in letter_bank_dict:
+            return False
+        else:
+            if frequency > letter_bank_dict[character]:
+                return False
+    return True
+    
 
 def score_word(word):
     pass
@@ -79,4 +109,3 @@ def score_word(word):
 def get_highest_word_score(word_list):
     pass
 
-# print(draw_letters())
