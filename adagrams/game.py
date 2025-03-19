@@ -56,7 +56,7 @@ def draw_letters():
         if letter not in hand_dict:
             hand_dict[letter] = 1
         else:
-            if hand_dict[letter] <= LETTER_POOL[letter]:
+            if hand_dict[letter] < LETTER_POOL[letter]:
                 hand_dict[letter] += 1
             else:
                 continue
