@@ -160,5 +160,38 @@ def score_word(word):
     
 
 def get_highest_word_score(word_list):
-    pass
+    # we need to create a dictionary of words as keys and scores as values. (should we add the word length here?)
+    # start the comparison: iterating over the dictionary and compare the values to get the highest score
+    # within this loop we should consider the tie cases: with if statement, check the score is greater, or =
+    # in case of equal scores: check the length of the words > smaller word is the winner!
+    # BUT if length of the word is 10, and there are multiple tie score, 10 letter word is the winner!
+    # if score and length are the same pich the first one as winner!
+    
+    highest_score = 0
+    winner_word = None
+
+    for word in word_list:
+        score = score_word(word)
+
+        if score > highest_score:
+            winner_word = word
+            highest_score = score
+     
+        elif score == highest_score:
+            if len(word) == 10 and len(winner_word) != 10:
+                winner_word = word              
+            elif len(word) < len(winner_word) and len (winner_word) != 10:
+                winner_word = word
+            else:
+                continue
+
+    return (winner_word, highest_score)
+
+# best_word = get_highest_word_score(["BBBBBB", "AAAAAAAAAA"])
+# print(best_word[0])
+# print(best_word[1])
+
+# best_word = get_highest_word_score(["JQ", "FHQ", "AAAAAAAAAA", "BBBBBB", "TTTTTTTTTT"])
+# print(best_word[0])
+# print(best_word[1])
 
