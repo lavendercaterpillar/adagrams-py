@@ -1,5 +1,7 @@
 from random import randint
 
+HAND_SIZE = 10
+
 LETTER_POOL = {
     'A': 9, 
     'B': 2, 
@@ -31,32 +33,32 @@ LETTER_POOL = {
 
 
 score_chart = {'A':1,
-                   'B':3,
-                   'C':3,
-                   'D':2,
-                   'E':1,
-                   'F':4,
-                   'G':2,
-                   'H':4,
-                   'I':1,
-                   'J':8,
-                   'K':5,
-                   'L':1,
-                   'M':3,
-                   'N':1,
-                   'O':1,
-                   'P':3,
-                   'Q':10,
-                   'R':1,
-                   'S':1,
-                   'T':1,
-                   'U':1,
-                   'V':4,
-                   'W':4,
-                   'X':8,
-                   'Y':4,
-                   'Z':10
-                   }
+                'B':3,
+                'C':3,
+                'D':2,
+                'E':1,
+                'F':4,
+                'G':2,
+                'H':4,
+                'I':1,
+                'J':8,
+                'K':5,
+                'L':1,
+                'M':3,
+                'N':1,
+                'O':1,
+                'P':3,
+                'Q':10,
+                'R':1,
+                'S':1,
+                'T':1,
+                'U':1,
+                'V':4,
+                'W':4,
+                'X':8,
+                'Y':4,
+                'Z':10
+                }
 
 
 def make_dict(array):
@@ -73,6 +75,9 @@ def make_dict(array):
             make_dict[character] += 1
     return make_dict
 
+# Easier way of doing it:
+# for character in array:
+#     make_dict[character] = make_dict.get(character, 0) + 1
 
 def draw_letters():
     # Convert letter pool dictionary to a list with repeated letters 
@@ -94,7 +99,10 @@ def draw_letters():
 
     # for i in range(10): Can't use for loop in indetermined number of loops
     hand_counter = 1
-    while hand_counter <= 10:
+
+
+    while hand_counter <= HAND_SIZE:  # using length len(hand_list) where you can instead of a counter
+    # while hand_counter <= 10:  # 10 here withour comment and out of nowhere is called "magic number"
         draw = randint(0, 97)
         letter = letter_pool_list[draw]
 
@@ -106,7 +114,7 @@ def draw_letters():
             else:
                 continue
         
-        hand_counter += 1
+        hand_counter += 1 
 
     for letter, frequency in hand_dict.items():
         for i in range(frequency):
